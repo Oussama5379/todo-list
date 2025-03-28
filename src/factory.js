@@ -53,7 +53,9 @@ function Project(projectName) {
 		todoList.push(item);
 	};
 	const deleteTodoItem = (item) => {
-		todoList.filter((element) => element.getID() != item.getId());
+		todoList = todoList.filter((element) => element.getID() != item.getId());
 	};
 	return { getName, getTodoList, setName, getID, addTodoItem, deleteTodoItem };
 }
+
+export { TodoItem, Project };
