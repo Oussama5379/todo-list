@@ -1,8 +1,8 @@
-function TodoItem(projectTitle, projectDescription, projectDueDate, projectPriority) {
-	let title = projectTitle,
-		description = projectDescription,
-		dueDate = projectDueDate,
-		priority = projectPriority,
+function TodoItem(todoTitle, todoDescription, todoDueDate, todoPriority) {
+	let title = todoTitle,
+		description = todoDescription,
+		dueDate = todoDueDate,
+		priority = todoPriority,
 		idDone = false;
 	const setTitle = (newTitle) => {
 		title = newTitle;
