@@ -1,8 +1,8 @@
-function addProjectToStorage(project) {
-	localStorage.setItem(project.id, JSON.stringify(project));
+function addProjectToStorage(id, project) {
+	localStorage.setItem(id, project);
 }
-function deleteProjectFromStorage(project) {
-	localStorage.removeItem(project.id);
+function deleteProjectFromStorage(id) {
+	localStorage.removeItem(id);
 }
 function allStorage() {
 	const values = [],
