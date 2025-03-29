@@ -3,7 +3,7 @@ function TodoItem(todoTitle, todoDescription, todoDueDate, todoPriority) {
 		description = todoDescription,
 		dueDate = todoDueDate,
 		priority = todoPriority,
-		idDone = false;
+		isDone = false;
 	const setTitle = (newTitle) => {
 		title = newTitle;
 	};
@@ -17,7 +17,7 @@ function TodoItem(todoTitle, todoDescription, todoDueDate, todoPriority) {
 		priority = newPriority;
 	};
 	const changeStatus = () => {
-		isDone = !idDone;
+		isDone = !isDone;
 	};
 
 	const getTitle = () => title;

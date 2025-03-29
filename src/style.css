@@ -35,12 +35,34 @@ body {
 .todo {
 	border: 1px black solid;
 	padding: 5px 10px;
+	border-radius: 20px;
+}
+.low-prior {
+	background-color: crimson;
+}
+.medium-prior {
+	background-color: yellow;
+}
+.high-prior {
+	background-color: green;
+}
+.done {
+	opacity: 0.5;
 }
 .todos-list {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-template-rows: repeat(5, 1fr);
 	gap: 5px;
+}
+.todo-prop {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.todo-prop button {
+	width: 100%;
+	font-size: 26px;
+	margin-bottom: 5px;
 }
 .projects-list > button {
 	font-size: 26px;
@@ -50,4 +72,16 @@ body {
 	border-top-right-radius: 20px;
 	width: 100%;
 	margin-bottom: 10px;
+}
+dialog {
+	position: fixed;
+	inset: 0 0 0 0;
+	margin: auto;
+	background: #f9f9f9;
+	width: 20%;
+	height: 60%;
+	border-radius: 0.5rem;
+}
+.input {
+	margin: 15px;
 }
