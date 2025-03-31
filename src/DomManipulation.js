@@ -1,44 +1,21 @@
 import { TodoItem, Project } from "./factory.js";
-import {
-	addProjectToStorage,
-	deleteProjectFromStorage,
-	allStorage,
-	clearStorage,
-	getProjectFromStorage,
-} from "./storage.js";
-const newTodoBtn = document.querySelector(".new-todo-btn");
-const todoDialog = document.querySelector(".todo-dialog");
+import { addProjectToStorage, deleteTodoFromStorage, getProjectFromStorage } from "./storage.js";
+
 const newProjectBtn = document.querySelector(".new-project-btn");
 const projectDialog = document.querySelector(".project-dialog");
 const projectSubmit = document.querySelector(".project-submit");
 const todoSubmit = document.querySelector(".todo-submit");
 
-newTodoBtn.addEventListener("click", () => {
-	todoDialog.showModal();
-});
 newProjectBtn.addEventListener("click", () => {
 	projectDialog.showModal();
 });
 projectSubmit.addEventListener("click", (event) => {
 	event.preventDefault();
-	//Add the project to the local storage
 	const projectName = document.querySelector("#project-name").value;
 	let project = Project(projectName);
 
 	addProjectToStorage(project.id, JSON.stringify(project));
 	addProject(project);
-	// //Add the project to the page
-	// const projectsList = document.querySelector(".projects-list");
-	// const projectButton = document.createElement("button");
-	// projectButton.textContent = projectName;
-	// projectButton.id = project.id;
-	// projectsList.appendChild(projectButton);
-	// //Add the project to the projects list in the todo form
-	// const projectSelect = document.querySelector("#todo-project");
-	// const option = document.createElement("option");
-	// option.value = project.id;
-	// option.textContent = projectName;
-	// projectSelect.appendChild(option);
 });
 todoSubmit.addEventListener("click", (event) => {
 	event.preventDefault();
@@ -52,6 +29,49 @@ todoSubmit.addEventListener("click", (event) => {
 	let project = JSON.parse(getProjectFromStorage(projectId));
 	project.todoList.push(todo);
 	addProjectToStorage(projectId, JSON.stringify(project));
+});
+
+export function addProject(project) {
+	//Add the project to the page
+	const projectsList = document.querySelector(".projects-list");
+	const projectButton = document.createElement("button");
+	projectButton.textContent = project.name;
+	projectButton.id = project.id;
+	projectButton.addEventListener("click", (event) => {
+		displayTodoList(event.target.id);
+	});
+	projectsList.appendChild(projectButton);
+	//Add the project to the projects list in the todo form
+	const projectSelect = document.querySelector("#todo-project");
+	const option = document.createElement("option");
+	option.value = project.id;
+	option.textContent = project.name;
+	projectSelect.appendChild(option);
+}
+export function displayTodoList(id) {
+	let project = JSON.parse(getProjectFromStorage(id));
+	const todoContainer = document.querySelector(".todo-items");
+	todoContainer.innerHTML = "";
+	todoContainer.id = id;
+	const projectTitle = document.createElement("h2");
+	const newTodoButton = document.createElement("button");
+	const todoList = document.createElement("div");
+	projectTitle.textContent = "Project : " + project.name;
+	newTodoButton.textContent = "New Todo";
+	newTodoButton.classList.add("new-todo-btn");
+	const todoDialog = document.querySelector(".todo-dialog");
+	newTodoButton.addEventListener("click", () => {
+		todoDialog.showModal();
+	});
+	todoList.classList.add("todos-list");
+	todoContainer.appendChild(projectTitle);
+	todoContainer.appendChild(newTodoButton);
+	todoContainer.appendChild(todoList);
+	for (let i = 0; i < project.todoList.length; i++) {
+		displayTodo(project.todoList[i]);
+	}
+}
+function displayTodo(todo) {
 	//Add the todo to the DOM
 	const todoList = document.querySelector(".todos-list");
 	const todoDiv = document.createElement("div");
@@ -70,21 +90,32 @@ todoSubmit.addEventListener("click", (event) => {
 	const delButton = document.createElement("button");
 	const statusButton = document.createElement("button");
 	todoDiv.classList.add("todo");
-	todoDiv.classList.add(priority);
-	divTitle.textContent = todoTitle;
-	divDescription.textContent = todoDescription;
+	todoDiv.classList.add(todo.priority);
+	divTitle.textContent = todo.title;
+	divDescription.textContent = todo.description;
 	todoProprieties.classList.add("todo-prop");
 	todoInfo.classList.add("todo-info");
 	todoButtons.classList.add("todo-buttons");
 	dueDateTitle.textContent = "Due Date :";
-	dueDatePara.textContent = dueDate;
+	dueDatePara.textContent = todo.dueDate;
 	statusTitle.textContent = "Status :";
 	statusPara.textContent = "Undone";
 	priorityTitle.textContent = "Priority :";
-	priorityPara.textContent = priority;
+	priorityPara.textContent = todo.priority;
 	editButton.textContent = "Edit";
+
 	delButton.textContent = "Delete";
+	delButton.addEventListener("click", (event) => {
+		let projectId = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+		deleteTodoFromStorage(todo, projectId);
+		event.target.parentNode.parentNode.parentNode.remove();
+	});
 	statusButton.textContent = "Set Done";
+	statusButton.addEventListener("click", (event) => {
+		todo.isDone = !todo.isDone;
+		statusPara.textContent = todo.isDone ? "Done" : "Undone";
+		todoDiv.classList.toggle("done");
+	});
 	editButton.classList.add("edit-btn");
 	delButton.classList.add("del-btn");
 	statusButton.classList.add("status-btn");
@@ -103,18 +134,4 @@ todoSubmit.addEventListener("click", (event) => {
 	todoDiv.appendChild(divDescription);
 	todoDiv.appendChild(todoProprieties);
 	todoList.append(todoDiv);
-});
-function addProject(project) {
-	//Add the project to the page
-	const projectsList = document.querySelector(".projects-list");
-	const projectButton = document.createElement("button");
-	projectButton.textContent = project.name;
-	projectButton.id = project.id;
-	projectsList.appendChild(projectButton);
-	//Add the project to the projects list in the todo form
-	const projectSelect = document.querySelector("#todo-project");
-	const option = document.createElement("option");
-	option.value = project.id;
-	option.textContent = project.name;
-	projectSelect.appendChild(option);
 }

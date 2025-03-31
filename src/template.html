@@ -22,83 +22,47 @@
 					</div>
 				</form>
 			</dialog>
-			<ul class="projects-list">
-				<button id="1">Main Project</button>
-			</ul>
+			<ul class="projects-list"></ul>
 		</div>
 		<div class="todo-items">
 			<h2>Project : Main Project</h2>
 			<button class="new-todo-btn">New Todo</button>
-			<dialog class="todo-dialog">
-				<h3>Todo Form</h3>
-				<form>
-					<div class="input">
-						<label for="todo-projecet">Project</label>
-						<select id="todo-project">
-							<option value="low">Main Project</option>
-						</select>
-					</div>
-					<div class="input">
-						<label for="todo-title">Title</label><br />
-						<input type="text" name="" id="todo-title" />
-					</div>
-					<div class="input">
-						<label for="todo-description">Description</label><br />
-						<input type="text" name="" id="todo-description" />
-					</div>
-					<div class="input">
-						<label for="due-date">Due Date</label><br />
-						<input type="date" id="due-date" />
-					</div>
-					<div class="input">
-						<label for="priority">Priority</label>
-						<select id="priority">
-							<option value="low">Low</option>
-							<option value="medium">Medium</option>
-							<option value="high">High</option>
-						</select>
-					</div>
-					<div class="input">
-						<label for="status">Status</label>
-						<select id="status">
-							<option value="done">Done</option>
-							<option value="undone">Undone</option>
-						</select>
-					</div>
-					<div class="input">
-						<button formmethod="dialog">Cancel</button>
-						<button>Add New Todo</button>
-					</div>
-				</form>
-			</dialog>
-			<div class="todos-list">
-				<div class="todo low-prior done">
-					<h4>todo title</h4>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus voluptas quam, ab
-						aliquam cum voluptate ipsa, eos expedita consequatur eius blanditiis ad dicta magni
-						iusto ipsam dolores ratione sed at.
-					</p>
-					<br />
-					<div class="todo-prop">
-						<div class="todo-info">
-							<h4>Due Date:</h4>
-							<p>12/06/2025</p>
-							<h4>Status :</h4>
-							<p>Undone</p>
-							<h4>Priority:</h4>
-							<p>Low</p>
-						</div>
-						<div class="todo-buttons">
-							<button>Edit</button>
-							<button>Delete</button>
-							<button>Set Done</button>
-						</div>
-					</div>
-				</div>
-				<div class="todo"></div>
-				<div class="todo"></div>
-			</div>
+
+			<div class="todos-list"></div>
 		</div>
+		<dialog class="todo-dialog">
+			<h3>Todo Form</h3>
+			<form>
+				<div class="input">
+					<label for="todo-project">Project</label>
+					<select id="todo-project"></select>
+				</div>
+				<div class="input">
+					<label for="todo-title">Title</label><br />
+					<input type="text" name="" id="todo-title" />
+				</div>
+				<div class="input">
+					<label for="todo-description">Description</label><br />
+					<input type="text" name="" id="todo-description" />
+				</div>
+				<div class="input">
+					<label for="due-date">Due Date</label><br />
+					<input type="date" id="due-date" />
+				</div>
+				<div class="input">
+					<label for="priority">Priority</label>
+					<select id="priority">
+						<option value="low">Low</option>
+						<option value="medium">Medium</option>
+						<option value="high">High</option>
+					</select>
+				</div>
+
+				<div class="input">
+					<button formmethod="dialog">Cancel</button>
+					<button class="todo-submit">Add New Todo</button>
+				</div>
+			</form>
+		</dialog>
 	</body>
 </html>

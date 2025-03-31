@@ -1,22 +1,17 @@
 import "./style.css";
 import "./DomManipulation.js";
-import { allStorage } from "./storage.js";
+import { addProject, displayTodoList } from "./DomManipulation.js";
+import { addProjectToStorage, allStorage } from "./storage.js";
+import { Project } from "./factory.js";
 window.onload = () => {
+	if (localStorage.getItem("1") === null) {
+		let mainProject = Project("Main Project");
+		console.log(mainProject);
+		mainProject.id = "1";
+		addProjectToStorage("1", JSON.stringify(mainProject));
+	}
 	const projects = allStorage();
 
 	projects.map((item) => addProject(JSON.parse(item)));
+	displayTodoList("1");
 };
-function addProject(project) {
-	//Add the project to the page
-	const projectsList = document.querySelector(".projects-list");
-	const projectButton = document.createElement("button");
-	projectButton.textContent = project.name;
-	projectButton.id = project.id;
-	projectsList.appendChild(projectButton);
-	//Add the project to the projects list in the todo form
-	const projectSelect = document.querySelector("#todo-project");
-	const option = document.createElement("option");
-	option.value = project.id;
-	option.textContent = project.name;
-	projectSelect.appendChild(option);
-}

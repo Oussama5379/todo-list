@@ -37,13 +37,13 @@ body {
 	padding: 5px 10px;
 	border-radius: 20px;
 }
-.low-prior {
+.low {
 	background-color: crimson;
 }
-.medium-prior {
+.medium {
 	background-color: yellow;
 }
-.high-prior {
+.high {
 	background-color: green;
 }
 .done {
